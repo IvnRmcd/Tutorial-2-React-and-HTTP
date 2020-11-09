@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import {Route, Switch, Link, BrowserRouter as Router} from "react-router-dom";
+import {Route, Switch, NavLink, BrowserRouter as Router} from "react-router-dom";
 import "./Blog.css";
 import Posts from "./Posts/Posts";
 import NewPost from "../../containers/Blog/NewPost/NewPost";
+import FullPost from "./FullPost/FullPost";
 
 class Blog extends Component {
   render() {
@@ -13,23 +14,20 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <NavLink to="/" exact>Home</NavLink>
               </li>
               <li>
-                <Link to={{
+                <NavLink to={{
                   pathname: '/new-post',
-                }}>New Post</Link>
+                }}>New Post</NavLink>
               </li>
             </ul>
           </nav>
         </header>
         <Switch>
-        <Route exact path="/">
-          <Posts />
-        </Route>
-          <Route exact path="/new-post">
-          <NewPost />
-        </Route>
+        <Route exact path="/" component={Posts}/>
+        <Route  path="/new-post" component={NewPost}/>
+        <Route path="/:id" component={FullPost} />
         </Switch>
       </div>
       </Router>
